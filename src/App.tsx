@@ -1,10 +1,19 @@
 import { mint } from "./Web3Service";
+import { useState } from "react";
 
 function App() {
+  const [message, setMessage] = useState("");
+  const [msgColor, setMsgColor] = useState("");
+
+  const messageStyle = { color: msgColor };
+
   function onBtnClicked() {
+    setMsgColor("white");
+    setMessage("Requesting your tokens... Please wait...");
+
     mint()
-      .then((tx) => alert(tx))
-      .catch(err => alert(err.message));
+      .then((tx) => {setMsgColor("lightGreen"); setMessage(`Your tokens were sent. Tx: ${tx}`)})
+      .catch(err => {setMsgColor("red"); setMessage(err.message)});
   }
 
   return (
@@ -25,7 +34,11 @@ function App() {
         <p className="lead">
           <a href="#" onClick={onBtnClicked} className="btn btn-lg btn-light fw-bold border-white bg-white">
             <img src="/assets/metamask.svg" alt="Metamask Logo" width={48}/>
-            Claim 1.000 coins</a>
+            Claim 1.000 coins
+          </a>
+        </p>
+        <p className="lead" style={messageStyle}>
+          {message}
         </p>
       </main>
 
