@@ -1,5 +1,12 @@
+import { mint } from "./Web3Service";
 
 function App() {
+  function onBtnClicked() {
+    mint()
+      .then((tx) => alert(tx))
+      .catch(err => alert(err.message));
+  }
+
   return (
     <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
       <header className="mb-auto">
@@ -16,9 +23,9 @@ function App() {
         <h1>Get yours ProtoCoins</h1>
         <p className="lead">Once a day, earn 1.000 coins for free just connecting your Metamask below.</p>
         <p className="lead">
-          <a href="#" className="btn btn-lg btn-light fw-bold border-white bg-white">
+          <a href="#" onClick={onBtnClicked} className="btn btn-lg btn-light fw-bold border-white bg-white">
             <img src="/assets/metamask.svg" alt="Metamask Logo" width={48}/>
-            Connect MetaMask</a>
+            Claim 1.000 coins</a>
         </p>
       </main>
 
