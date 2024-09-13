@@ -16,9 +16,8 @@ function App() {
       setMessage("Requesting your tokens... Please wait...");
 
       mint()
-        .then((tx) => {setMsgColor("lightGreen"); setMessage(`Your tokens were sent. Tx: ${tx}`)})
-        .catch(err => {setMsgColor("red"); setMessage(err.response ? err.response.data : err )});
-      setCaptcha("");
+        .then((tx) => {setMsgColor("lightGreen"); setMessage(`Your tokens were sent to ${localStorage.getItem('wallet')}. Tx: ${tx}`)})
+        .catch(err => {setMsgColor("red"); setMessage(err.response ? err.response.data : err.message )});
     } else {
       setMessage("Check the \"I'm not a robot\" captcha first.");
     }
